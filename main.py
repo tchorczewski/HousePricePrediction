@@ -19,7 +19,7 @@ print(housing['ocean_proximity'].value_counts())
 #Missing values heatmap
 sns.heatmap(housing.isnull(), yticklabels=False, cbar=False, cmap='viridis')
 plt.title('Null values visualization')
-#plt.show()
+plt.show()
 
 #Number of missing values per column
 print(housing.isna().sum())
@@ -30,7 +30,7 @@ ocn_prox_data = housing.groupby('ocean_proximity')
 missing_bedrooms = housing[housing['total_bedrooms'].isnull()]
 sns.countplot(data=missing_bedrooms, x='ocean_proximity')
 plt.title('Missing bedroom data vs ocean_proximity')
-#plt.show()
+plt.show()
 
 print(ocn_prox_data['total_bedrooms'].mean())
 print(ocn_prox_data['total_bedrooms'].median())
@@ -40,24 +40,29 @@ housing['total_bedrooms'] = housing['total_bedrooms'].fillna(housing.groupby('oc
 
 sns.heatmap(housing.isnull(), yticklabels=False, cbar=False, cmap='viridis')
 plt.title('Null values visualization after filling')
-#plt.show()
+plt.show()
 
 #Median house value vs ocean proximity
 sns.boxplot(data=housing, x='ocean_proximity', y='median_house_value')
 plt.title('House value vs ocean proximity')
-#plt.show()
+plt.show()
 
 print(ocn_prox_data['median_house_value'].mean())
 print(ocn_prox_data['median_house_value'].median())
 
+#Median price vs ocean proximity
+sns.boxplot(data=housing, x='ocean_proximity', y='median_income' )
+plt.title('Income vs Ocean Proximity')
+plt.show()
+
 #Exploring correlation between data
 sns.pairplot(housing, hue='ocean_proximity')
 plt.title('Housing numerical data relations')
-#plt.show()
+plt.show()
 
 sns.heatmap(data=housing.corr(numeric_only=True), cmap='coolwarm')
 plt.title('Correlation heatmap')
-#plt.show()
+plt.show()
 
 #Transforming left skewed data
 housing[['total_rooms','total_bedrooms','population','households','median_income','median_house_value']] = np.log1p(housing[['total_rooms','total_bedrooms','population','households','median_income','median_house_value']])
@@ -65,6 +70,12 @@ housing[['total_rooms','total_bedrooms','population','households','median_income
 #Converting categorical data to numerical
 columns = ['ocean_proximity']
 final_data = pd.get_dummies(housing, columns=columns, drop_first=True)
+
+#Median Income vs Median house price
+sns.lmplot(data=housing, x='median_income', y='median_house_value')
+plt.title("Income vs house value")
+plt.show()
+
 
 #Splitting data
 x_train,x_test,y_train,y_test = train_test_split(final_data.drop('median_house_value', axis=1),final_data['median_house_value'], test_size=.3, random_state=101)
@@ -82,7 +93,7 @@ predictions = linear_regression.predict(x_test)
 
 #Plotting residuals to check if they are normally distributed
 sns.displot((y_test-predictions),bins=50, kde=True)
-#plt.show()
+plt.show()
 
 #Calculating performance metrics
 print('Linear Regression Metrics')
@@ -98,6 +109,8 @@ print('Decision Tree Regressor Metrics')
 print(metrics.root_mean_squared_error(y_test, d_tree_predictions))
 print(metrics.mean_absolute_error(y_test,d_tree_predictions))
 print(metrics.mean_squared_error(y_test,d_tree_predictions))
+sns.displot((y_test-d_tree_predictions),bins=50, kde=True)
+plt.show()
 
 #Random Forest Regressor
 r_forest = RandomForestRegressor()
@@ -107,3 +120,5 @@ print('Random Forest Regressor Metrics')
 print(metrics.root_mean_squared_error(y_test, r_forest_predictions))
 print(metrics.mean_absolute_error(y_test,r_forest_predictions))
 print(metrics.mean_squared_error(y_test,r_forest_predictions))
+sns.displot((y_test-r_forest_predictions),bins=50, kde=True)
+plt.show()
