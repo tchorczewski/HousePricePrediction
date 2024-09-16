@@ -6,6 +6,8 @@ from sklearn.preprocessing import StandardScaler
 from sklearn.linear_model import LinearRegression
 from sklearn.model_selection import train_test_split
 from sklearn import metrics
+from sklearn.tree import DecisionTreeRegressor
+from sklearn.ensemble import RandomForestRegressor
 
 housing = pd.read_csv('housing.csv')
 print(housing.info())
@@ -83,6 +85,25 @@ sns.displot((y_test-predictions),bins=50, kde=True)
 #plt.show()
 
 #Calculating performance metrics
+print('Linear Regression Metrics')
 print(metrics.root_mean_squared_error(y_test, predictions))
 print(metrics.mean_absolute_error(y_test,predictions))
 print(metrics.mean_squared_error(y_test,predictions))
+
+#Decision Tree Regressor
+d_tree = DecisionTreeRegressor()
+d_tree.fit(x_train,y_train)
+d_tree_predictions = d_tree.predict(x_test)
+print('Decision Tree Regressor Metrics')
+print(metrics.root_mean_squared_error(y_test, d_tree_predictions))
+print(metrics.mean_absolute_error(y_test,d_tree_predictions))
+print(metrics.mean_squared_error(y_test,d_tree_predictions))
+
+#Random Forest Regressor
+r_forest = RandomForestRegressor()
+r_forest.fit(x_train,y_train)
+r_forest_predictions = r_forest.predict(x_test)
+print('Random Forest Regressor Metrics')
+print(metrics.root_mean_squared_error(y_test, r_forest_predictions))
+print(metrics.mean_absolute_error(y_test,r_forest_predictions))
+print(metrics.mean_squared_error(y_test,r_forest_predictions))
