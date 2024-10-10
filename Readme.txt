@@ -32,21 +32,24 @@ The models were evaluated using:
 Root Mean Squared Error (RMSE)
 Mean Absolute Error (MAE)
 Mean Squared Error (MSE)
-Performance Summary:
-Linear Regression:
 
+Performance Summary:
+
+Linear Regression:
 RMSE: 0.327
 MAE: 0.243
 MSE: 0.107
-Decision Tree Regressor:
+R^2: 0.672
 
+Decision Tree Regressor:
 RMSE: 0.422
 MAE: 0.308
 MSE: 0.178
-Random Forest Regressor:
 
+Random Forest Regressor:
 RMSE: 0.304
 MAE: 0.223
 MSE: 0.092
+
 Conclusion:
 The Random Forest Regressor performed the best, followed by Linear Regression. Decision Tree Regressor had the worst performance due to overfitting on the training data.
