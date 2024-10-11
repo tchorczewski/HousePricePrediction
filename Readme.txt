@@ -1,55 +1,46 @@
-Housing Prices Prediction
-Project Overview
-This project uses machine learning models to predict housing prices based on various features in the California housing dataset. The primary goal is to explore different regression models and evaluate their performance.
+This project explores the use of machine learning models to predict housing prices based on various features from the California housing dataset. The primary goal is to experiment with different regression models, evaluate their performance, and improve predictive accuracy through hyperparameter tuning.
 
-Dataset:
-The dataset used in this project is from the California Housing Prices and includes information like:
+Dataset
+The dataset used is the California Housing Prices dataset, which includes features such as:
 
 Median house values
 Number of rooms, bedrooms, and households
-Population in each block
-Median Income
+Population per block
+Median income
 Proximity to the ocean
+
 Project Steps
-Data Exploration:
-
-Initial overview of the data, including the structure, missing values, and basic statistical summaries.
-Visualization of missing data and exploration of relationships between features using heatmaps, pairplots, and boxplots.
-Data Preprocessing:
-
-Filling missing data: Missing values in the total_bedrooms column were imputed based on the median values grouped by ocean_proximity.
-Categorical to numerical conversion: The ocean_proximity column was transformed into dummy variables.
-Skewed data transformation: Left-skewed numerical columns (e.g., total_rooms, total_bedrooms, population) were transformed using logarithmic scaling.
-Data Scaling: Numerical columns (except for longitude and latitude) were standardized using StandardScaler to ensure all features are on the same scale.
-Model Training:
-
+1. Data Exploration
+Overview of the dataset, checking its structure, missing values, and summary statistics.
+Visual exploration using heatmaps, pairplots, and boxplots to understand relationships between features and detect any anomalies.
+2. Data Preprocessing
+Filling Missing Data: Missing values in the total_bedrooms column were filled using the median values grouped by ocean_proximity.
+Converting Categorical Data: The ocean_proximity column was transformed into dummy variables.
+Transforming Skewed Data: Logarithmic transformation was applied to left-skewed numerical features (total_rooms, total_bedrooms, population, etc.).
+Data Scaling: Numerical columns, excluding longitude and latitude, were standardized using StandardScaler to ensure consistent scaling across features.
+3. Model Training
 Linear Regression: A simple linear regression model was trained to predict the median_house_value.
-Decision Tree Regressor: A decision tree model was trained and evaluated.
-Random Forest Regressor: A random forest model was trained and evaluated.
-Model Evaluation:
+Decision Tree Regressor: A decision tree was trained and further fine-tuned using hyperparameter optimization.
+Random Forest Regressor: A random forest model was trained and optimized through hyperparameter tuning to increase prediction accuracy.
+4. Model Evaluation
+Each model was evaluated using:
 
-The models were evaluated using:
 Root Mean Squared Error (RMSE)
 Mean Absolute Error (MAE)
 Mean Squared Error (MSE)
+R² Score
+Performance Summary
 
-Performance Summary:
+Model	RMSE	MAE	MSE	R² Score
+Linear Regression	0.3271	0.2432	0.1070	0.6720
+Decision Tree (Pre-tuning)	0.4211	0.3074	0.1773	0.4562
+Decision Tree (Post-tuning)	0.3260	0.2451	0.1063	0.6741
+Random Forest (Pre-tuning)	0.3039	0.2226	0.0924	0.7167
+Random Forest (Post-tuning)	0.3260	0.2451	0.1063	0.6741
 
-Linear Regression:
-RMSE: 0.327
-MAE: 0.243
-MSE: 0.107
-R^2: 0.672
+Conclusion
+The Random Forest Regressor exhibited the best performance in terms of RMSE, MSE, and R² score, outperforming both the Linear Regression and Decision Tree models.
 
-Decision Tree Regressor:
-RMSE: 0.422
-MAE: 0.308
-MSE: 0.178
+Although the Decision Tree Regressor initially performed poorly due to overfitting, its performance significantly improved after hyperparameter tuning, making it comparable to the other models. However, the Random Forest model maintained a slight edge in predictive power. The Linear Regression model, though simpler, also delivered solid results, proving that even basic models can be effective depending on the dataset.
 
-Random Forest Regressor:
-RMSE: 0.304
-MAE: 0.223
-MSE: 0.092
-
-Conclusion:
-The Random Forest Regressor performed the best, followed by Linear Regression. Decision Tree Regressor had the worst performance due to overfitting on the training data.
+Future work could explore other ensemble methods (e.g., gradient boosting) and deeper feature engineering to further enhance prediction accuracy.
