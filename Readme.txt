@@ -32,8 +32,8 @@ Each model was evaluated using:
 
 Performance Summary:
 
-Model	RMSE	MAE	MSE	R² Score
-Linear Regression	0.3271	0.2432	0.1070	0.6720
+Model	                       RMSE	   MAE	    MSE	  R² Score
+Linear Regression	         0.3271	0.2432	0.1070	0.6720
 Decision Tree (Pre-tuning)	0.4211	0.3074	0.1773	0.4562
 Decision Tree (Post-tuning)	0.3260	0.2451	0.1063	0.6741
 Random Forest (Pre-tuning)	0.3039	0.2226	0.0924	0.7167
