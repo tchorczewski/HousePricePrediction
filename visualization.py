@@ -39,6 +39,10 @@ plt.show()
 print(ocn_prox_data['total_bedrooms'].mean())
 print(ocn_prox_data['total_bedrooms'].median())
 
+#Filling missing data
+housing['total_bedrooms'] = housing['total_bedrooms'].fillna(housing.groupby('ocean_proximity')['total_bedrooms']
+                                                             .transform('median'))
+
 sns.heatmap(housing.isnull(), yticklabels=False, cbar=False, cmap='viridis')
 plt.title('Null values visualization after filling')
 plt.show()
